@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daptha-shop - Oleh-Oleh Khas Bangka Belitung</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      /* Reset dan Base Styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: #8b4513; /* Warna coklat terasi */
+        color: #fff8dc; /* Warna tulisan cream */
+        line-height: 1.6;
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center;
+        background-blend-mode: overlay;
+      }
+
+      header {
+        background-color: #5d2906; /* Coklat tua */
+        color: #ffd700; /* Kuning emas */
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        position: relative;
+        z-index: 100;
+        border-bottom: 3px solid #ffd700;
+      }
+
+      .logo-container {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .logo {
+        height: 50px;
+        width: auto;
+        border-radius: 50%;
+        border: 2px solid #ffd700;
+      }
+
+      nav ul {
+        display: flex;
+        list-style: none;
+        gap: 2rem;
+      }
+
+      nav a {
+        color: #ffd700;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+      }
+
+      nav a:hover {
+        background-color: rgba(255, 215, 0, 0.2);
+      }
+
+      .cart-icon {
+        position: relative;
+        cursor: pointer;
+      }
+
+      .cart-count {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        background-color: #e53935;
+        color: white;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: bold;
+      }
+
+      main {
+        padding: 2rem;
+        max-width: 1200px;
+        margin: 2rem auto;
+        background-color: rgba(
+          139,
+          69,
+          19,
+          0.85
+        ); /* Coklat terasi semi transparan */
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        border: 2px solid #ffd700;
+      }
+
+      h1,
+      h2 {
+        margin-bottom: 1.5rem;
+        color: #ffd700; /* Warna kuning emas */
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      }
+
+      h2 {
+        border-bottom: 2px solid #ffd700;
+        padding-bottom: 0.5rem;
+        display: inline-block;
+      }
+
+      /* Produk Styles */
+      .products-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-bottom: 3rem;
+      }
+
+      .product-card {
+        background: rgba(255, 248, 220, 0.9); /* Warna cream */
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s;
+        border: 1px solid #5d2906;
+        position: relative;
+      }
+
+      .product-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 25px rgba(93, 41, 6, 0.5);
+      }
+
+      .product-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-bottom: 3px solid #5d2906;
+      }
+
+      .product-info {
+        padding: 1.5rem;
+        color: #5d2906; /* Warna coklat tua untuk teks */
+      }
+
+      .product-info h3 {
+        margin-bottom: 0.5rem;
+        color: #8b4513; /* Warna coklat terasi */
+      }
+
+      .product-price {
+        font-weight: bold;
+        color: #e53935; /* Merah */
+        margin-bottom: 0.5rem;
+        font-size: 1.2rem;
+      }
+
+      .product-desc {
+        color: #5d2906;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+        line-height: 1.5;
+      }
+
+      .rating {
+        color: #ffc107; /* Kuning rating */
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+      }
+
+      .rating i {
+        margin-right: 2px;
+      }
+
+      /* Form Styles */
+      .product-form {
+        background: rgba(255, 248, 220, 0.9); /* Warna cream */
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(93, 41, 6, 0.2);
+        max-width: 600px;
+        margin: 0 auto;
+        border: 1px solid #5d2906;
+        color: #5d2906;
+      }
+
+      .image-upload {
+        text-align: center;
+        margin-bottom: 1.5rem;
+      }
+
+      #product-preview {
+        width: 100%;
+        max-height: 300px;
+        object-fit: cover;
+        border-radius: 10px;
+        margin-bottom: 1rem;
+        border: 3px dashed #5d2906;
+        padding: 5px;
+        background-color: #fff8dc;
+      }
+
+      #product-image {
+        display: none;
+      }
+
+      #upload-btn {
+        background: linear-gradient(135deg, #8b4513 0%, #5d2906 100%);
+        color: #ffd700;
+        border: none;
+        padding: 0.7rem 1.5rem;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: all 0.3s;
+        font-weight: bold;
+        box-shadow: 0 3px 10px rgba(93, 41, 6, 0.3);
+      }
+
+      #upload-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(93, 41, 6, 0.4);
+      }
+
+      #upload-btn i {
+        margin-right: 8px;
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: #8b4513;
+      }
+
+      .form-group input,
+      .form-group textarea,
+      .form-group select {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: 2px solid #5d2906;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: all 0.3s;
+        background-color: #fff8dc;
+      }
+
+      .form-group input:focus,
+      .form-group textarea:focus,
+      .form-group select:focus {
+        border-color: #ffd700;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2);
+      }
+
+      .form-group textarea {
+        resize: vertical;
+        min-height: 100px;
+      }
+
+      #add-product-btn {
+        background: linear-gradient(135deg, #8b4513 0%, #5d2906 100%);
+        color: #ffd700;
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: 30px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s;
+        width: 100%;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        box-shadow: 0 3px 10px rgba(93, 41, 6, 0.3);
+        margin-top: 1rem;
+      }
+
+      #add-product-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(93, 41, 6, 0.4);
+      }
+
+      .edit-btn {
+        background: linear-gradient(135deg, #8b4513 0%, #5d2906 100%);
+        color: #ffd700;
+        border: none;
+        padding: 0.7rem 1.5rem;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: all 0.3s;
+        width: 100%;
+        font-weight: bold;
+        box-shadow: 0 3px 10px rgba(93, 41, 6, 0.3);
+        margin-top: 0.5rem;
+      }
+
+      .edit-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(93, 41, 6, 0.4);
+      }
+
+      .edit-btn i {
+        margin-right: 8px;
+      }
+
+      .add-to-cart {
+        background: linear-gradient(135deg, #5d2906 0%, #8b4513 100%);
+        color: #ffd700;
+        border: none;
+        padding: 0.7rem 1.5rem;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: all 0.3s;
+        width: 100%;
+        font-weight: bold;
+        box-shadow: 0 3px 10px rgba(93, 41, 6, 0.3);
+        margin-top: 0.5rem;
+      }
+
+      .add-to-cart:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(93, 41, 6, 0.4);
+      }
+
+      footer {
+        text-align: center;
+        padding: 2rem;
+        background: linear-gradient(135deg, #5d2906 0%, #8b4513 100%);
+        color: #ffd700;
+        margin-top: 2rem;
+        border-top: 3px solid #ffd700;
+      }
+
+      footer p {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      /* Modal Keranjang */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 1000;
+        overflow: auto;
+      }
+
+      .modal-content {
+        background-color: #fff8dc;
+        margin: 5% auto;
+        padding: 2rem;
+        border-radius: 10px;
+        width: 80%;
+        max-width: 800px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        animation: modalFadeIn 0.3s;
+        border: 2px solid #5d2906;
+        color: #5d2906;
+      }
+
+      @keyframes modalFadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .close-modal {
+        float: right;
+        font-size: 1.5rem;
+        font-weight: bold;
+        cursor: pointer;
+        color: #8b4513;
+      }
+
+      .close-modal:hover {
+        color: #5d2906;
+      }
+
+      .cart-items {
+        margin: 1rem 0;
+      }
+
+      .cart-item {
+        display: flex;
+        align-items: center;
+        padding: 1rem 0;
+        border-bottom: 1px solid #5d2906;
+      }
+
+      .cart-item img {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 5px;
+        margin-right: 1rem;
+        border: 2px solid #5d2906;
+      }
+
+      .cart-item-info {
+        flex: 1;
+      }
+
+      .cart-item-title {
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        color: #8b4513;
+      }
+
+      .cart-item-price {
+        color: #e53935;
+        font-weight: bold;
+      }
+
+      .cart-item-quantity {
+        display: flex;
+        align-items: center;
+        margin-top: 0.5rem;
+      }
+
+      .quantity-btn {
+        background-color: #5d2906;
+        color: #ffd700;
+        border: none;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .quantity-input {
+        width: 50px;
+        text-align: center;
+        margin: 0 0.5rem;
+        padding: 0.25rem;
+        border: 1px solid #5d2906;
+        border-radius: 4px;
+        background-color: #fff8dc;
+      }
+
+      .remove-item {
+        color: #e53935;
+        background: none;
+        border: none;
+        cursor: pointer;
+        margin-left: 1rem;
+        font-size: 1.2rem;
+      }
+
+      .cart-total {
+        text-align: right;
+        margin-top: 1rem;
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #8b4513;
+      }
+
+      .checkout-btn {
+        background: linear-gradient(135deg, #8b4513 0%, #5d2906 100%);
+        color: #ffd700;
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: 30px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s;
+        width: 100%;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        box-shadow: 0 3px 10px rgba(93, 41, 6, 0.3);
+        margin-top: 1rem;
+      }
+
+      .checkout-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(93, 41, 6, 0.4);
+      }
+
+      /* Animasi */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .product-card {
+        animation: fadeIn 0.5s ease-out forwards;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        header {
+          flex-direction: column;
+          text-align: center;
+          gap: 1rem;
+          padding: 1rem;
+        }
+
+        nav ul {
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+
+        .products-container {
+          grid-template-columns: 1fr;
+        }
+
+        main {
+          padding: 1rem;
+          margin: 1rem;
+        }
+
+        .modal-content {
+          width: 95%;
+          margin: 10% auto;
+          padding: 1rem;
+        }
+
+        .cart-item {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .cart-item img {
+          margin-bottom: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      
+        <h1>Daptha-shop</h1>
+      </div>
+      <nav>
+        <ul>
+          <li>
+            <a href="#home"><i class="fas fa-home"></i> Beranda</a>
+          </li>
+          <li>
+            <a href="#products"><i class="fas fa-store"></i> Produk</a>
+          </li>
+          <li>
+            <a href="#about"><i class="fas fa-info-circle"></i> Tentang</a>
+          </li>
+          <li>
+            <a href="#contact"><i class="fas fa-phone-alt"></i> Kontak</a>
+          </li>
+          <li class="cart-icon" id="cart-icon">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count" id="cart-count">0</span>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section id="featured-products">
+        <h2><i class="fas fa-gifts"></i> Oleh-Oleh Khas Bangka Belitung</h2>
+        <div class="products-container" id="products-container">
+          <!-- Produk akan dimuat melalui JavaScript -->
+        </div>
+      </section>
+
+      <section id="add-product">
+        <h2><i class="fas fa-plus-circle"></i> Tambah Produk Baru</h2>
+        <div class="product-form">
+          <div class="image-upload">
+            <img
+              id="product-preview"
+              src="https://via.placeholder.com/300x200/5D2906/FFD700?text=Unggah+Foto"
+              alt="Preview Produk"
+            />
+            <input type="file" id="product-image" accept="image/*" />
+            <button id="upload-btn">
+              <i class="fas fa-camera"></i> Pilih Foto
+            </button>
+          </div>
+          <div class="form-group">
+            <label for="product-name"
+              ><i class="fas fa-tag"></i> Nama Produk:</label
+            >
+            <input
+              type="text"
+              id="product-name"
+              placeholder="Contoh: Kemplang, Lempah Kuning, dll"
+            />
+          </div>
+          <div class="form-group">
+            <label for="product-price"
+              ><i class="fas fa-money-bill-wave"></i> Harga (Rp):</label
+            >
+            <input
+              type="number"
+              id="product-price"
+              placeholder="Contoh: 50000"
+            />
+          </div>
+          <div class="form-group">
+            <label for="product-rating"
+              ><i class="fas fa-star"></i> Rating Awal (1-5):</label
+            >
+            <select id="product-rating">
+              <option value="5">★★★★★</option>
+              <option value="4">★★★★☆</option>
+              <option value="3">★★★☆☆</option>
+              <option value="2">★★☆☆☆</option>
+              <option value="1">★☆☆☆☆</option>
+              <option value="0" selected>☆☆☆☆☆</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="product-desc"
+              ><i class="fas fa-align-left"></i> Deskripsi:</label
+            >
+            <textarea
+              id="product-desc"
+              rows="4"
+              placeholder="Deskripsi produk..."
+            ></textarea>
+          </div>
+          <button id="add-product-btn">
+            <i class="fas fa-plus"></i> Tambah Produk
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <!-- Modal Keranjang Belanja -->
+    <div class="modal" id="cart-modal">
+      <div class="modal-content">
+        <span class="close-modal" id="close-modal">&times;</span>
+        <h2><i class="fas fa-shopping-cart"></i> Keranjang Belanja</h2>
+        <div class="cart-items" id="cart-items">
+          <!-- Item keranjang akan dimuat di sini -->
+        </div>
+        <div class="cart-total">Total: Rp <span id="cart-total">0</span></div>
+        <button class="checkout-btn" id="checkout-btn">
+          <i class="fas fa-credit-card"></i> Checkout
+        </button>
+      </div>
+    </div>
+
+    <footer>
+      <p>
+        <i class="fas fa-map-marker-alt"></i> Bangka Belitung - PangkalPinang |
+        &copy; 2025 Daftha-shop - Marketplace Oleh-Oleh Bangka Belitung
+      </p>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Inisialisasi produk dengan rating 0
+        let products = [
+          {
+            id: 1,
+            name: "Getas",
+            price: 25000,
+            rating: 0,
+            description:
+              "Makanan ringan khas Bangka Belitung yang terbuat dari tepung beras, ikan laut yang segar sehingga mendapatkan rasa yang gurih, lezat, dan renyah.",
+            image: "gambar/getas.jpg", // File lokal
+          },
+
+          {
+            id: 2,
+            name: "Belacan Bangka Belitong",
+            price: 35000,
+            rating: 0,
+            description:
+              "Terasi khas Belitung yang terbuat dari udang rebon dengan aroma dan rasa yang khas dan lezat.",
+            image: "gambar/terasi.jpg", // File lokal
+          },
+          {
+            id: 3,
+            name: "Keritcu",
+            price: 30000,
+            rating: 0,
+            description:
+              "Makanan ringan khas Bangka Belitung terbuat dari bahan utama berupa telur cumi dicampur dengan sagu kemudian dimasak berbentuk kecil-kecil dengan rasa gurih dan renyah.",
+            image: "gambar/keritcu asli.jpg", // File lokal
+          },
+          {
+            id: 4,
+            name: "Sambal Lingkong",
+            price: 40000,
+            rating: 0,
+            description:
+              "Sambal/abon khas Bangka Belitung terbuat dari ikan tengiri, santan kelapa, dan rempah-rempah dengan cita rasa pedas yang khas dan nikmat.",
+            image: "gambar/samballingkongbelitong.jpg", // File lokal
+          },
+          {
+            id: 5,
+            name: "Sirup Jeruk Kunci",
+            price: 45000,
+            rating: 0,
+            description:
+              "Sirup khas Bangka Belitung yang terbuat dari jeruk kunci dengan rasa segar dan manis.",
+            image: "gambar/sirup jeruk kunci.jpg", // File lokal
+          },
+          {
+            id: 6,
+            name: "Lempok Cempedak",
+            price: 50000,
+            rating: 0,
+            description:
+              "Olahan buah cempedak yang dimasak dengan gula hingga kental, memiliki rasa manis yang khas.",
+            image: "gambar/cempedak.jpg", // File lokal
+          },
+          {
+            id: 7,
+            name: "Gantungan Kunci Kerang",
+            price: 15000,
+            rating: 0,
+            description:
+              "Gantungan kunci yang terbuat dari kerang, lebih kokoh, serta banyak macamnya",
+            image: "gambar/gantungankuncikerang.jpg", // File lokal
+          },
+          {
+            id: 8,
+            name: "Keripik Sukun",
+            price: 20000,
+            rating: 0,
+            description:
+              "Cemilan keripik buah sukun yang enak dan gurih membuat konsumen menjadi ketagihan",
+            image: "gambar/keripiksukun.jpg", // File lokal
+          },
+          {
+            id: 9,
+            name: "Kain Cual",
+            price: 15000000,
+            rating: 0,
+            description:
+              "kain tenun tradisional Bangka Belitung. Kain cual dibuat seperti kerajinan songket, tetapi yang motifnya adalah tenun ikat. Motif tenun cual antara lain susunan motif corak penuh (Penganten Bekecak), dan motif ruang kosong Jande Bekecak). Cual Bangka dahulu dikenal dengan nama Limar Muntok.",
+            image: "gambar/Kain cual.jpg", // File lokal,
+          },
+          {
+            id: 10,
+            name: "",
+            price: 0,
+            rating: 0,
+            description: "",
+            image:
+              "https://via.placeholder.com/300x200/5D2906/FFD700?text=Produk+10",
+          },
+        ];
+
+        // Inisialisasi keranjang belanja
+        let cart = [];
+
+        // DOM Elements
+        const productsContainer = document.getElementById("products-container");
+        const productImageInput = document.getElementById("product-image");
+        const productPreview = document.getElementById("product-preview");
+        const uploadBtn = document.getElementById("upload-btn");
+        const productNameInput = document.getElementById("product-name");
+        const productPriceInput = document.getElementById("product-price");
+        const productRatingInput = document.getElementById("product-rating");
+        const productDescInput = document.getElementById("product-desc");
+        const addProductBtn = document.getElementById("add-product-btn");
+        const cartIcon = document.getElementById("cart-icon");
+        const cartCount = document.getElementById("cart-count");
+        const cartModal = document.getElementById("cart-modal");
+        const closeModal = document.getElementById("close-modal");
+        const cartItemsContainer = document.getElementById("cart-items");
+        const cartTotal = document.getElementById("cart-total");
+        const checkoutBtn = document.getElementById("checkout-btn");
+
+        // Fungsi untuk menampilkan rating dalam bentuk bintang
+        function renderRating(rating) {
+          let stars = "";
+          for (let i = 1; i <= 5; i++) {
+            stars +=
+              i <= rating
+                ? '<i class="fas fa-star"></i>'
+                : '<i class="far fa-star"></i>';
+          }
+          return stars;
+        }
+
+        // Render produk
+        function renderProducts() {
+          productsContainer.innerHTML = "";
+          products.forEach((product, index) => {
+            if (!product.name) return; // Skip produk kosong
+
+            const productCard = document.createElement("div");
+            productCard.className = "product-card";
+            productCard.style.animationDelay = `${index * 0.1}s`;
+            productCard.innerHTML = `
+                        <img src="${product.image}" alt="${
+              product.name
+            }" class="product-image">
+                        <div class="product-info">
+                            <h3>${product.name}</h3>
+                            <div class="rating">${renderRating(
+                              product.rating
+                            )}</div>
+                            <p class="product-price">${
+                              product.price
+                                ? "Rp " + product.price.toLocaleString("id-ID")
+                                : "Harga belum ditentukan"
+                            }</p>
+                            <p class="product-desc">${
+                              product.description || "Deskripsi belum tersedia"
+                            }</p>
+                            <button class="add-to-cart" data-id="${
+                              product.id
+                            }"><i class="fas fa-cart-plus"></i> Tambah ke Keranjang</button>
+                            <button class="edit-btn" data-id="${
+                              product.id
+                            }"><i class="fas fa-edit"></i> Edit Produk</button>
+                        </div>
+                    `;
+            productsContainer.appendChild(productCard);
+          });
+
+          // Tambahkan event listener untuk tombol edit
+          document.querySelectorAll(".edit-btn").forEach((btn) => {
+            btn.addEventListener("click", function () {
+              const productId = parseInt(this.getAttribute("data-id"));
+              editProduct(productId);
+            });
+          });
+
+          // Tambahkan event listener untuk tombol tambah ke keranjang
+          document.querySelectorAll(".add-to-cart").forEach((btn) => {
+            btn.addEventListener("click", function () {
+              const productId = parseInt(this.getAttribute("data-id"));
+              addToCart(productId);
+            });
+          });
+        }
+
+        // Fungsi untuk mengedit produk
+        function editProduct(productId) {
+          const product = products.find((p) => p.id === productId);
+          if (!product) return;
+
+          // Isi form dengan data produk yang ada
+          productNameInput.value = product.name;
+          productPriceInput.value = product.price;
+          productRatingInput.value = product.rating;
+          productDescInput.value = product.description;
+          productPreview.src = product.image;
+
+          // Scroll ke form edit
+          window.scrollTo({
+            top: document.getElementById("add-product").offsetTop - 20,
+            behavior: "smooth",
+          });
+
+          // Ubah teks tombol menjadi "Update Produk"
+          addProductBtn.innerHTML =
+            '<i class="fas fa-sync-alt"></i> Update Produk';
+          addProductBtn.onclick = function () {
+            updateProduct(productId);
+          };
+        }
+
+        // Fungsi untuk update produk
+        function updateProduct(productId) {
+          const productIndex = products.findIndex((p) => p.id === productId);
+          if (productIndex === -1) return;
+
+          const name = productNameInput.value.trim();
+          const price = parseInt(productPriceInput.value);
+          const rating = parseInt(productRatingInput.value);
+          const description = productDescInput.value.trim();
+          const image = productPreview.src;
+
+          if (!name || isNaN(price) || !description) {
+            alert("Harap isi semua field dengan benar!");
+            return;
+          }
+
+          if (price < 1000) {
+            alert("Harga produk minimal Rp 1.000");
+            return;
+          }
+
+          // Update produk
+          products[productIndex] = {
+            ...products[productIndex],
+            name,
+            price,
+            rating,
+            description,
+            image,
+          };
+
+          renderProducts();
+          resetForm();
+          alert("Produk berhasil diupdate!");
+        }
+
+        // Fungsi untuk menambah produk ke keranjang
+        function addToCart(productId) {
+          const product = products.find((p) => p.id === productId);
+          if (!product) return;
+
+          if (!product.name || product.price <= 0) {
+            alert("Produk belum lengkap, tidak bisa ditambahkan ke keranjang");
+            return;
+          }
+
+          const existingItem = cart.find((item) => item.id === productId);
+          if (existingItem) {
+            existingItem.quantity += 1;
+          } else {
+            cart.push({
+              id: product.id,
+              name: product.name,
+              price: product.price,
+              image: product.image,
+              quantity: 1,
+            });
+          }
+
+          updateCart();
+          alert(`${product.name} telah ditambahkan ke keranjang!`);
+        }
+
+        // Fungsi untuk update keranjang
+        function updateCart() {
+          // Update jumlah item di icon keranjang
+          const totalItems = cart.reduce(
+            (total, item) => total + item.quantity,
+            0
+          );
+          cartCount.textContent = totalItems;
+
+          // Update daftar item di modal keranjang
+          cartItemsContainer.innerHTML = "";
+          if (cart.length === 0) {
+            cartItemsContainer.innerHTML = "<p>Keranjang belanja kosong</p>";
+            cartTotal.textContent = "0";
+            return;
+          }
+
+          let totalPrice = 0;
+          cart.forEach((item) => {
+            const itemTotal = item.price * item.quantity;
+            totalPrice += itemTotal;
+
+            const cartItemElement = document.createElement("div");
+            cartItemElement.className = "cart-item";
+            cartItemElement.innerHTML = `
+                        <img src="${item.image}" alt="${item.name}">
+                        <div class="cart-item-info">
+                            <div class="cart-item-title">${item.name}</div>
+                            <div class="cart-item-price">Rp ${item.price.toLocaleString(
+                              "id-ID"
+                            )}</div>
+                            <div class="cart-item-quantity">
+                                <button class="quantity-btn minus" data-id="${
+                                  item.id
+                                }">-</button>
+                                <input type="number" class="quantity-input" value="${
+                                  item.quantity
+                                }" min="1" data-id="${item.id}">
+                                <button class="quantity-btn plus" data-id="${
+                                  item.id
+                                }">+</button>
+                                <button class="remove-item" data-id="${
+                                  item.id
+                                }"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                    `;
+            cartItemsContainer.appendChild(cartItemElement);
+          });
+
+          // Update total harga
+          cartTotal.textContent = totalPrice.toLocaleString("id-ID");
+
+          // Tambahkan event listener untuk tombol quantity
+          document.querySelectorAll(".quantity-btn.minus").forEach((btn) => {
+            btn.addEventListener("click", function () {
+              const productId = parseInt(this.getAttribute("data-id"));
+              updateCartItemQuantity(productId, -1);
+            });
+          });
+
+          document.querySelectorAll(".quantity-btn.plus").forEach((btn) => {
+            btn.addEventListener("click", function () {
+              const productId = parseInt(this.getAttribute("data-id"));
+              updateCartItemQuantity(productId, 1);
+            });
+          });
+
+          document.querySelectorAll(".quantity-input").forEach((input) => {
+            input.addEventListener("change", function () {
+              const productId = parseInt(this.getAttribute("data-id"));
+              const newQuantity = parseInt(this.value);
+              if (newQuantity > 0) {
+                updateCartItemQuantity(productId, 0, newQuantity);
+              }
+            });
+          });
+
+          document.querySelectorAll(".remove-item").forEach((btn) => {
+            btn.addEventListener("click", function () {
+              const productId = parseInt(this.getAttribute("data-id"));
+              removeFromCart(productId);
+            });
+          });
+        }
+
+        // Fungsi untuk update quantity item di keranjang
+        function updateCartItemQuantity(productId, change, newQuantity = null) {
+          const item = cart.find((item) => item.id === productId);
+          if (!item) return;
+
+          if (newQuantity !== null) {
+            item.quantity = newQuantity;
+          } else {
+            item.quantity += change;
+            if (item.quantity < 1) item.quantity = 1;
+          }
+
+          updateCart();
+        }
+
+        // Fungsi untuk menghapus item dari keranjang
+        function removeFromCart(productId) {
+          cart = cart.filter((item) => item.id !== productId);
+          updateCart();
+        }
+
+        // Fungsi untuk reset form
+        function resetForm() {
+          productNameInput.value = "";
+          productPriceInput.value = "";
+          productRatingInput.value = "0";
+          productDescInput.value = "";
+          productPreview.src =
+            "https://via.placeholder.com/300x200/5D2906/FFD700?text=Unggah+Foto";
+          productImageInput.value = "";
+
+          // Kembalikan tombol ke keadaan semula
+          addProductBtn.innerHTML = '<i class="fas fa-plus"></i> Tambah Produk';
+          addProductBtn.onclick = addNewProduct;
+        }
+
+        // Fungsi untuk menambahkan produk baru
+        function addNewProduct() {
+          const name = productNameInput.value.trim();
+          const price = parseInt(productPriceInput.value);
+          const rating = parseInt(productRatingInput.value);
+          const description = productDescInput.value.trim();
+          const image = productPreview.src.includes("placeholder.com")
+            ? "https://via.placeholder.com/300x200/5D2906/FFD700?text=Produk+Baru"
+            : productPreview.src;
+
+          if (!name || isNaN(price) || !description) {
+            alert("Harap isi semua field dengan benar!");
+            return;
+          }
+
+          if (price < 1000) {
+            alert("Harga produk minimal Rp 1.000");
+            return;
+          }
+
+          const newProduct = {
+            id:
+              products.length > 0
+                ? Math.max(...products.map((p) => p.id)) + 1
+                : 1,
+            name,
+            price,
+            rating,
+            description,
+            image,
+          };
+
+          // Cari produk kosong pertama untuk diisi
+          const emptyProductIndex = products.findIndex((p) => !p.name);
+          if (emptyProductIndex !== -1) {
+            products[emptyProductIndex] = newProduct;
+          } else {
+            products.push(newProduct);
+          }
+
+          renderProducts();
+          resetForm();
+
+          // Scroll ke produk baru
+          setTimeout(() => {
+            window.scrollTo({
+              top: document.getElementById("featured-products").offsetTop - 20,
+              behavior: "smooth",
+            });
+          }, 300);
+
+          alert(`Produk "${name}" berhasil ditambahkan!`);
+        }
+
+        // Event listener untuk upload gambar
+        uploadBtn.addEventListener("click", function () {
+          productImageInput.click();
+        });
+
+        productImageInput.addEventListener("change", function () {
+          const file = this.files[0];
+          if (file) {
+            if (file.size > 2 * 1024 * 1024) {
+              alert("Ukuran file terlalu besar. Maksimal 2MB");
+              return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function (event) {
+              productPreview.src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+          }
+        });
+
+        // Event listener untuk tombol tambah produk
+        addProductBtn.onclick = addNewProduct;
+
+        // Event listener untuk keranjang belanja
+        cartIcon.addEventListener("click", function () {
+          cartModal.style.display = "block";
+          document.body.style.overflow = "hidden";
+        });
+
+        closeModal.addEventListener("click", function () {
+          cartModal.style.display = "none";
+          document.body.style.overflow = "auto";
+        });
+
+        window.addEventListener("click", function (event) {
+          if (event.target === cartModal) {
+            cartModal.style.display = "none";
+            document.body.style.overflow = "auto";
+          }
+        });
+
+        // Event listener untuk checkout
+        checkoutBtn.addEventListener("click", function () {
+          if (cart.length === 0) {
+            alert("Keranjang belanja kosong!");
+            return;
+          }
+
+          const total = cart.reduce(
+            (sum, item) => sum + item.price * item.quantity,
+            0
+          );
+          alert(
+            `Checkout berhasil! Total belanja: Rp ${total.toLocaleString(
+              "id-ID"
+            )}\nTerima kasih telah berbelanja di By-Oleh Babel!`
+          );
+
+          // Kosongkan keranjang setelah checkout
+          cart = [];
+          updateCart();
+          cartModal.style.display = "none";
+          document.body.style.overflow = "auto";
+        });
+
+        // Render produk pertama kali
+        renderProducts();
+      });
+    </script>
+  </body>
+</html>
