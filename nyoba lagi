@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Selamat Ulang Tahun!</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Canvas Confetti Library untuk efek kembang api/konfeti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+  <!-- Floating Background Elements -->
+  <div class="balloon-container" id="balloonContainer"></div>
+
+  <div class="card-container">
+    <div class="card">
+      <div class="header">
+        <span class="badge">Special Day ✨</span>
+        <h1 class="title">Happy Birthday! 🥳</h1>
+      </div>
+
+      <!-- Interactive Cake -->
+      <div class="cake-wrapper">
+        <div class="cake">
+          <div class="candle">
+            <div class="flame" id="flame"></div>
+          </div>
+          <div class="top-layer"></div>
+          <div class="middle-layer"></div>
+          <div class="bottom-layer"></div>
+        </div>
+      </div>
+
+      <!-- Wish Message -->
+      <div class="message-box">
+        <p id="greetingText">
+          Selamat merayakan hari spesialmu! Semoga di usia yang baru ini senantiasa dipenuhi kebahagiaan, kesehatan, keberhasilan, dan keberkahan dalam setiap langkah. 🌟
+        </p>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="btn-group">
+        <button class="btn btn-primary" onclick="blowCandle()">🎂 Tiup Lilin</button>
+        <button class="btn btn-secondary" onclick="triggerConfetti()">🎉 Rayakan!</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
